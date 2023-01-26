@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>scheduler</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Scheduler</h1>
+      </div>
+      <div class="row">
+        <main class="main">
+          <div class="button-container">
+            <button class="btn">Left</button>
+            <button class="btn">Right</button>
+          </div>
+          <div class="scheduler-container">
+            <div class="date-container">
+              <span class="corner"></span>
+              <div class="date">25.01</div>
+              <div class="date">26.01</div>
+              <div class="date">27.01</div>
+              <div class="date">28.01</div>
+              <div class="date">29.01</div>
+              <div class="date">30.01</div>
+              <div class="date">31.01</div>
+            </div>
+            <div class="executor-container">
+              <span class="executor">Иван</span>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+            </div>
+            <div class="executor-container">
+              <span class="executor">Петр</span>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+            </div>
+            <div class="executor-container">
+              <span class="executor">Артем</span>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+              <div class="task-executor"></div>
+            </div>
+          </div>
+        </main>
+        <aside class="aside">
+          <h2>Backlog</h2>
+          <form class="search-form">
+            <input
+              id="search-input"
+              placeholder="Поиск"
+              class="search-input flex-grow-1"
+            />
+            <button type="submit" class="btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+          <div class="container_task">
+            <div class="task">
+              <h4 class="task-title">JIRA</h4>
+              <p class="task-description">Что то не подходит</p>
+            </div>
+            <div class="task">
+              <h4 class="task-title">JIRA</h4>
+              <p class="task-description">Что то не подходит</p>
+            </div>
+            <div class="task">
+              <h4 class="task-title">JIRA</h4>
+              <p class="task-description">Что то не подходит</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

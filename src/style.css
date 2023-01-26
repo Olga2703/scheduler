@@ -1,3 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  color: burlywood;
+  font-family: "Open Sans", sans-serif;
+}
+.container {
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 20px;
+  background: darkgray;
+  color: white;
+}
+
+h1 {
+  font-size: 80px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main {
+  flex: 70%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  background-color: gainsboro;
+}
+
+.aside {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: dimgray;
+  padding: 20px;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+}
+.container_task {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.task {
+  border-radius: 10px;
+  background-color: darkgray;
+  padding: 5px;
+}
+
+.search-form {
+  display: flex;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.scheduler-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-container {
+  display: flex;
+}
+
+.corner {
+  width: 100px;
+  height: 70px;
+  margin: 2px;
+}
+
+.date {
+  width: 100px;
+  border: solid 1px white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+}
+
+.executor-container {
+  display: flex;
+}
+
+.executor {
+  width: 100px;
+  height: 70px;
+  background-color: cadetblue;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+}
+
+.task-executor {
+  background-color: white;
+  width: 100px;
+  height: 70px;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 100px;
+  color: cadetblue;
+  background-color: white;
+  border: solid 1px cadetblue;
+  border-radius: 5px;
+}
+
+.search-form {
+  display: flex;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.search-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 2px cadetblue;
 }
