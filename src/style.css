@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 .container {
   height: 100vh;
@@ -53,12 +53,21 @@ h2 {
 .container_task {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 1rem;
 }
 .task {
   border-radius: 10px;
   background-color: darkgray;
   padding: 5px;
+}
+
+.task-title {
+  color: cadetblue;
+}
+
+.task-description {
+  color: white;
 }
 
 .search-form {
@@ -78,21 +87,25 @@ h2 {
 
 .date-container {
   display: flex;
+  width: 100%;
 }
 
 .corner {
-  width: 100px;
+  width: 100%;
   height: 70px;
   margin: 2px;
+  flex: 0 0 calc(100% / 8 - 5px);
 }
 
 .date {
-  width: 100px;
+  width: 100%;
   border: solid 1px white;
   display: flex;
+  flex: 0 0 calc(100% / 8 - 5px);
   justify-content: center;
   align-items: center;
   margin: 2px;
+  color: cadetblue;
 }
 
 .executor-container {
@@ -100,8 +113,9 @@ h2 {
 }
 
 .executor {
-  width: 100px;
+  width: 100%;
   height: 70px;
+  flex: 0 0 calc(100% / 8 - 5px);
   background-color: cadetblue;
   color: white;
   text-align: center;
@@ -113,10 +127,11 @@ h2 {
 
 .task-executor {
   background-color: white;
-  width: 100px;
+  width: 100%;
   height: 70px;
   margin: 2px;
   display: flex;
+  flex: 0 0 calc(100% / 8 - 5px);
   justify-content: center;
   align-items: center;
 }
