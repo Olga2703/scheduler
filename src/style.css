@@ -185,3 +185,7 @@ h2 {
   padding: 10px;
   cursor: move;
 }
+
+.hide {
+  display: none;
+}

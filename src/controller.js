@@ -49,6 +49,16 @@ const handleView = (elements, state, i18n) => {
     nextDate.setDate(state.date.getDate() + 7);
     state.data = nextDate;
   });
+  elements.inputSearch.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    state.valueSearch = `${value}`;
+  });
+
+  elements.formSearch.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const value = elements.inputSearch.value.trim();
+    state.valueSearch = `${value}`;
+  });
 };
 
 export default handleView;

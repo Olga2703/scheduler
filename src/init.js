@@ -12,6 +12,8 @@ export default () => {
     btnLeft: document.querySelector('button[data-toggle="left"]'),
     btnRight: document.querySelector('button[data-toggle="right"]'),
     taskContainer: document.querySelector('.container_task'),
+    inputSearch: document.querySelector('#search-input'),
+    formSearch: document.querySelector('.search-form'),
   };
 
   const i18nInstance = i18n.createInstance();
@@ -20,7 +22,7 @@ export default () => {
     executors: [],
     tasks: [],
     date: null,
-    week: [],
+    valueSearch: '',
   };
   console.log(state);
   const watchState = onChange(state, render(elements, state, i18nInstance));

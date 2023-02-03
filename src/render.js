@@ -122,6 +122,22 @@ const renderExecutors = (elements, state) => {
   });
   elements.schedulerContainer.append(...executorsRow);
 };
+
+const renderSearch = (elements, state) => {
+  const listTasks = document.querySelectorAll('.task .task-title');
+  if (state.valueSearch !== '') {
+    listTasks.forEach((task) => {
+      if (!task.textContent.toLowerCase().includes(state.valueSearch)) {
+        task.parentElement.classList.add('hide');
+      } else {
+        listTasks.forEach((item) => {
+          item.parentElement.classList.remove('hide');
+        });
+      }
+    });
+  }
+};
+
 export default (elements, state, i18n) => (path) => {
   switch (path) {
     case 'date':
@@ -134,6 +150,9 @@ export default (elements, state, i18n) => (path) => {
     case 'tasks':
       renderTasks(elements, state);
       updateTaskExecutors(elements, state);
+      break;
+    case 'valueSearch':
+      renderSearch(elements, state);
       break;
     default:
       break;
