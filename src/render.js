@@ -16,8 +16,27 @@ const renderСalendar = (elements, state) => {
     nowDateNumber.setDate(nowDateNumber.getDate() + 1);
   }
   elements.dateContainer.replaceChildren(elementCorner, ...elementsDates);
-  const task = filterDate(state.date, state.tasks);
-  console.log(task);
+};
+
+const updateTaskExecutors = (elements, state) => {
+  const taskExec = state.tasks.filter((task) => task.idExecutor !== null);
+  taskExec.forEach((task) => {
+    const container = document.getElementById(`${task.idExecutor}`);
+    const containerTasks = container.querySelectorAll('.task-executor');
+    containerTasks.forEach((item) => item.replaceChildren());
+  });
+  const tasks = filterDate(state.date, taskExec);
+  for (let i = 0; i < tasks.length; i += 1) {
+    const startDate = new Date(tasks[i].planStartDate);
+    const weekDay = startDate.getDay();
+    const elementDiv = document.createElement('div');
+    elementDiv.classList.add('plan');
+    elementDiv.textContent = `${tasks[i].title}`;
+    const container = document.getElementById(`${tasks[i].idExecutor}`);
+
+    const containerTasks = container.querySelectorAll('.task-executor');
+    containerTasks[weekDay - 1].replaceChildren(elementDiv);
+  }
 };
 
 const renderTasks = (elements, state) => {
@@ -26,6 +45,7 @@ const renderTasks = (elements, state) => {
     .map((task) => {
       const elementDiv = document.createElement('div');
       elementDiv.classList.add('task');
+      elementDiv.id = task.id;
       const elementTitle = document.createElement('h4');
       elementTitle.classList.add('task-title');
       elementTitle.textContent = task.title;
@@ -36,14 +56,58 @@ const renderTasks = (elements, state) => {
       return elementDiv;
     });
   elements.taskContainer.replaceChildren(...elementTasks);
-  const task = filterDate(state.date, state.tasks);
-  console.log(task);
+  const taskElements = elements.taskContainer.querySelectorAll('.task');
+  for (const task of taskElements) {
+    task.draggable = true;
+  }
+  elements.taskContainer.addEventListener('dragstart', (evt) => {
+    evt.target.classList.add('selected');
+    evt.dataTransfer.setData('taskDrag', evt.target.id);
+  });
+
+  elements.taskContainer.addEventListener('dragend', (evt) => {
+    evt.target.classList.remove('selected');
+  });
+
+  const executorContainers = document.querySelectorAll('.executor-container');
+  executorContainers.forEach((exec) => {
+    exec.addEventListener('dragover', (evt) => {
+      evt.preventDefault();
+    });
+    exec.addEventListener('drop', (evt) => {
+      const dragId = evt.dataTransfer.getData('taskDrag');
+      const taskIndex = state.tasks.findIndex((item) => item.id === dragId);
+      state.tasks[taskIndex].idExecutor = exec.id;
+      if (evt.target.classList.contains('task-executor')) {
+        const elementDiv = document.createElement('div');
+        elementDiv.classList.add('plan');
+        elementDiv.textContent = `${state.tasks[taskIndex].title}`;
+        elementDiv.dataset.taskId = state.tasks[taskIndex].id;
+        evt.target.replaceChildren(elementDiv);
+        const listContainerTask = exec.querySelectorAll('.task-executor');
+        listContainerTask.forEach((item, index) => {
+          const el = item.firstChild;
+          if (el && el.dataset.taskId === state.tasks[taskIndex].id) {
+            const startWeek = new Date(state.date);
+            startWeek.setDate(startWeek.getDate() + index);
+            state.tasks[taskIndex].planStartDate = startWeek;
+          }
+        });
+        renderTasks(elements, state);
+      }
+      if (evt.target.classList.contains('executor')) {
+        updateTaskExecutors(elements, state);
+        renderTasks(elements, state);
+      }
+    });
+  });
 };
 
 const renderExecutors = (elements, state) => {
   const executorsRow = state.executors.map((executor) => {
     const executorContainer = document.createElement('div');
     executorContainer.classList.add('executor-container');
+    executorContainer.id = executor.id;
     const elementName = document.createElement('span');
     elementName.classList.add('executor');
     elementName.textContent = `${executor.firstName} ${executor.surname}`;
@@ -58,16 +122,20 @@ const renderExecutors = (elements, state) => {
   });
   elements.schedulerContainer.append(...executorsRow);
 };
-export default (elements, state, i18n) => (path, value) => {
+export default (elements, state, i18n) => (path) => {
   switch (path) {
     case 'date':
       renderСalendar(elements, state, i18n);
+      updateTaskExecutors(elements, state);
       break;
     case 'executors':
       renderExecutors(elements, state);
       break;
     case 'tasks':
       renderTasks(elements, state);
+      updateTaskExecutors(elements, state);
+      break;
+    default:
       break;
   }
 };

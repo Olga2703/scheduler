@@ -28,23 +28,12 @@ const getTasks = (state, link) => {
   });
 };
 
-const handleDistributionTask = (state) => {
-  const freeTasks = state.tasks.filter((task) => task.idExecutor === null);
-};
-
 const handleView = (elements, state, i18n) => {
   const date = new Date();
   while (date.getDay() !== 1) {
     date.setDate(date.getDate() - 1);
   }
   state.date = date;
-  // let dayWeek = new Date(state.date);
-  // for (let i = 0; i < 7; i += 1) {
-  //   console.log(dayWeek);
-  //   state.week[i] = new Date(state.date);
-  //   state.date.setDate(state.date.getDate() + 1);
-  // }
-  // console.log(state.week);
   getExecutors(state, routes.executors);
   getTasks(state, routes.tasks);
 
