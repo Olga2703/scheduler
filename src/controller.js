@@ -56,7 +56,8 @@ const handleView = (elements, state, i18n) => {
 
   elements.formSearch.addEventListener('submit', (e) => {
     e.preventDefault();
-    const value = elements.inputSearch.value.trim();
+    const formData = new FormData(e.target);
+    const value = formData.get('search').trim();
     state.valueSearch = `${value}`;
   });
 };

@@ -125,16 +125,15 @@ const renderExecutors = (elements, state) => {
 
 const renderSearch = (elements, state) => {
   const listTasks = document.querySelectorAll('.task .task-title');
-  if (state.valueSearch !== '') {
-    listTasks.forEach((task) => {
-      if (!task.textContent.toLowerCase().includes(state.valueSearch)) {
-        task.parentElement.classList.add('hide');
-      } else {
-        listTasks.forEach((item) => {
-          item.parentElement.classList.remove('hide');
-        });
-      }
-    });
+  const listTasksArr = [...listTasks].filter((task) => {
+    if (!task.textContent.toLowerCase().startsWith(state.valueSearch)) {
+      task.parentElement.classList.add('hide');
+      return false;
+    }
+    return true;
+  });
+  for (const listTask of listTasksArr) {
+    listTask.parentElement.classList.remove('hide');
   }
 };
 
