@@ -8,24 +8,36 @@ const routes = {
     'https://varankin_dev.elma365.ru/api/extensions/2a38760e-083a-4dd0-aebc-78b570bfd3c7/script/tasks',
 };
 
-const getExecutors = (state, link) => {
-  axios.get(link).then((response) => {
-    state.executors = [...response.data];
-  });
+const getExecutors = (state, link, i18n) => {
+  axios
+    .get(link)
+    .then((response) => {
+      state.executors = [...response.data];
+    })
+    .catch(() => {
+      state.error = 'errors.netErrors';
+      throw new Error(i18n.t(state.error));
+    });
 };
 
-const getTasks = (state, link) => {
-  axios.get(link).then((response) => {
-    const tasks = [...response.data];
-    state.tasks = tasks.map((task) => ({
-      id: uniqueId(),
-      title: task.subject,
-      description: task.description,
-      idExecutor: task.executor,
-      planStartDate: task.planStartDate,
-      planEndDate: task.planEndDate,
-    }));
-  });
+const getTasks = (state, link, i18n) => {
+  axios
+    .get(link)
+    .then((response) => {
+      const tasks = [...response.data];
+      state.tasks = tasks.map((task) => ({
+        id: uniqueId(),
+        title: task.subject,
+        description: task.description,
+        idExecutor: task.executor,
+        planStartDate: task.planStartDate,
+        planEndDate: task.planEndDate,
+      }));
+    })
+    .catch(() => {
+      state.error = 'errors.netErrors';
+      throw new Error(i18n.t(state.error));
+    });
 };
 
 const handleView = (elements, state, i18n) => {
@@ -34,8 +46,8 @@ const handleView = (elements, state, i18n) => {
     date.setDate(date.getDate() - 1);
   }
   state.date = date;
-  getExecutors(state, routes.executors);
-  getTasks(state, routes.tasks);
+  getExecutors(state, routes.executors, i18n);
+  getTasks(state, routes.tasks, i18n);
 
   elements.btnLeft.addEventListener('click', (e) => {
     e.preventDefault();

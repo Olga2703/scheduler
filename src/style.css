@@ -190,6 +190,28 @@ h2 {
   display: none;
 }
 
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  width: 300px;
+  left: -60%;
+  top: 0;
+  background: cadetblue;
+  color: white;
+  padding: 0.5em;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  opacity: 0;
+  transition: 1s;
+}
+[data-tooltip]:hover::after {
+  opacity: 50%;
+  top: 2em;
+}
+
 @media screen and (max-width: 600px) {
   .aside {
     visibility: hidden;

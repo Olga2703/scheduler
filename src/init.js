@@ -23,8 +23,8 @@ export default () => {
     tasks: [],
     date: null,
     valueSearch: '',
+    error: '',
   };
-  console.log(state);
   const watchState = onChange(state, render(elements, state, i18nInstance));
 
   return i18nInstance

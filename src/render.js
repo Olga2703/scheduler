@@ -46,6 +46,7 @@ const renderTasks = (elements, state) => {
       const elementDiv = document.createElement('div');
       elementDiv.classList.add('task');
       elementDiv.id = task.id;
+      elementDiv.dataset.dataTooltip = 'Перемести задачу на календарь';
       const elementTitle = document.createElement('h4');
       elementTitle.classList.add('task-title');
       elementTitle.textContent = task.title;
