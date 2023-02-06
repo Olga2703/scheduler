@@ -1,7 +1,7 @@
 import parserNumber from './parserNumber.js';
 import filterDate from './filterDate.js';
 
-const renderСalendar = (elements, state) => {
+const renderCalendar = (elements, state) => {
   const nowDateNumber = new Date(state.date);
   const elementsDates = [];
   const elementCorner = document.createElement('span');
@@ -46,7 +46,7 @@ const renderTasks = (elements, state) => {
       const elementDiv = document.createElement('div');
       elementDiv.classList.add('task');
       elementDiv.id = task.id;
-      elementDiv.dataset.dataTooltip = 'Перемести задачу на календарь';
+      elementDiv.dataset.tooltip = 'Перемести задачу на календарь';
       const elementTitle = document.createElement('h4');
       elementTitle.classList.add('task-title');
       elementTitle.textContent = task.title;
@@ -58,9 +58,9 @@ const renderTasks = (elements, state) => {
     });
   elements.taskContainer.replaceChildren(...elementTasks);
   const taskElements = elements.taskContainer.querySelectorAll('.task');
-  for (const task of taskElements) {
+  taskElements.forEach((task) => {
     task.draggable = true;
-  }
+  });
   elements.taskContainer.addEventListener('dragstart', (evt) => {
     evt.target.classList.add('selected');
     evt.dataTransfer.setData('taskDrag', evt.target.id);
@@ -133,15 +133,15 @@ const renderSearch = (elements, state) => {
     }
     return true;
   });
-  for (const listTask of listTasksArr) {
+  listTasksArr.forEach((listTask) => {
     listTask.parentElement.classList.remove('hide');
-  }
+  });
 };
 
 export default (elements, state, i18n) => (path) => {
   switch (path) {
     case 'date':
-      renderСalendar(elements, state, i18n);
+      renderCalendar(elements, state, i18n);
       updateTaskExecutors(elements, state);
       break;
     case 'executors':

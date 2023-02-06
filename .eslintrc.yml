@@ -17,4 +17,4 @@ extends:
   - 'plugin:jest/recommended'
   - 'prettier'
 
-rules: { no-console: 0, import/extensions: 0, no-param-reassign: 0 }
+rules: { no-console: 0, import/extensions: 0, no-param-reassign: 0, eslint-disable-next-line: 0 }
